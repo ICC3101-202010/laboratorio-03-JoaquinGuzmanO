@@ -6,13 +6,13 @@ namespace laboratorio3
 {
     class Person
     {
-        protected int rut;
+        protected string rut;
         protected string name;
         protected string last_name;
-        protected int date_of_birth;
+        protected string date_of_birth;
         protected string nacionality;
 
-        public Person(int rut, string name, string last_name, int date_of_birth, string nacionality)
+        public Person(string rut, string name, string last_name, string date_of_birth, string nacionality)
         {
             this.rut = rut;
             this.name = name;
@@ -20,7 +20,7 @@ namespace laboratorio3
             this.date_of_birth = date_of_birth;
             this.nacionality = nacionality;
         }
-        public int getRut()
+        public string getRut()
         {
             return rut;
         }
@@ -35,7 +35,7 @@ namespace laboratorio3
             return last_name;
         }
 
-        public int getDate_of_birth()
+        public string getDate_of_birth()
         {
             return date_of_birth;
         }
