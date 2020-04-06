@@ -16,5 +16,11 @@ namespace laboratorio3
         {
             return salary;
         }
+
+        public string Informacion()
+        {
+            return "rut: " + rut + " " + "nombre: " + name + " " + "apellido : " + last_name + " " + "fecha de nacimiento: "
+                + date_of_birth + " " + "nacionalidad: " + nacionality + " " + "sueldo: " + salary;
+        }
     }
 }

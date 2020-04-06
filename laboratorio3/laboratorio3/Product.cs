@@ -34,5 +34,11 @@ namespace laboratorio3
         {
             return Pstock;
         }
+
+        public string Informacion()
+        {
+            return "nombre: " + Pname + " " + "precio : " + Pprice + " " + "marca: "
+                + Pbrand + " " + "stock: " + Pstock ;
+        }
     }
 }

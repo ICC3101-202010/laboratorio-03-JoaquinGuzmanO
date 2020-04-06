@@ -10,5 +10,12 @@ namespace laboratorio3
             : base(rut, name, last_name, date_of_birth, nacionality)
         {
         }
+
+        public string Informacion()
+        {
+            return "rut: " + rut + " " + "nombre: " + name + " " + "apellido : " + last_name + " " + "fecha de nacimiento: "
+                + date_of_birth + " " + "nacionalidad: " + nacionality ;
+        }
     }
+
 }
