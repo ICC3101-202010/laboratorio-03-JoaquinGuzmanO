@@ -196,7 +196,7 @@ namespace laboratorio3
                                     {
                                         compras.Add(comprador);
                                         compras.Add(prod);
-                                        Product producto = new Product(product_l[k].getPname(), product_l[k].getPprice(), product_l[k].getPbrand(), product_l[k].getPprice()-1);
+                                        Product producto = new Product(product_l[k].getPname(), product_l[k].getPprice(), product_l[k].getPbrand(), product_l[k].getPstock()-1);
                                         product_l.Add(producto);
                                         product_l.Remove(product_l[k]);
                                     }
