@@ -9,6 +9,7 @@ namespace laboratorio3
         {
 
             Console.WriteLine("Bienvenido al supermercado ¡De todo un poco! ");
+            Console.WriteLine("################################################");
 
             // ################### CREACION JEFE ####################
 
@@ -31,7 +32,7 @@ namespace laboratorio3
             // ################### CREACION EMPLEADOS ####################
 
             List<Employee> employees_l = new List<Employee>();
-
+            Console.WriteLine("################################################");
             Console.WriteLine("diga cuantos Empleados quiere crear");
             string e = Console.ReadLine();
             int e1 = Int16.Parse(e);
@@ -50,6 +51,7 @@ namespace laboratorio3
                 string nae = Console.ReadLine();
                 Console.WriteLine("diga el sueldo del empleado:");
                 string se = Console.ReadLine();
+                Console.WriteLine("################################################");
 
                 Employee empleado = new Employee(re, ne, ae, dbe, nae, se);
                 employees_l.Add(empleado);
@@ -77,6 +79,7 @@ namespace laboratorio3
                 string naa = Console.ReadLine();
                 Console.WriteLine("diga el sueldo del auxiliar:");
                 string sa = Console.ReadLine();
+                Console.WriteLine("################################################");
 
                 Auxiliary auxiliar = new Auxiliary(ra, na, aa, dba, naa, sa);
                 auxiliary_l.Add(auxiliar);
@@ -102,6 +105,7 @@ namespace laboratorio3
                 string dbc = Console.ReadLine();
                 Console.WriteLine("diga la nacionalidad del cliente:");
                 string nac = Console.ReadLine();
+                Console.WriteLine("################################################");
 
                 Client cliente = new Client(rc, nc, ac, dbc, nac);
                 client_l.Add(cliente);
@@ -130,30 +134,35 @@ namespace laboratorio3
 
                 Product producto = new Product(np, pp, bp, sp);
                 product_l.Add(producto);
+                Console.WriteLine("################################################");
             }
 
             Console.WriteLine("Los datos ingreados son los siguientes");
             Console.WriteLine("################################################");
-            Console.WriteLine("Jefe");
+            Console.WriteLine("Jefe: ");
             Console.WriteLine(jefe.Informacion());
+            Console.WriteLine("################################################");
 
             Console.WriteLine("Los empleados son : ");
             for (int i = 0; i < e1; i++)
             {
                 Console.WriteLine(employees_l[i].Informacion());
             }
+            Console.WriteLine("################################################");
 
             Console.WriteLine("Los auxiliares son : ");
             for (int i = 0; i < a1; i++)
             {
                 Console.WriteLine(auxiliary_l[i].Informacion());
             }
+            Console.WriteLine("################################################");
 
             Console.WriteLine("Los clientes son : ");
             for (int i = 0; i < c1; i++)
             {
                 Console.WriteLine(client_l[i].Informacion());
             }
+            Console.WriteLine("################################################");
 
             Console.WriteLine("Los productos son : ");
             for (int i = 0; i < p1; i++)
@@ -162,22 +171,24 @@ namespace laboratorio3
             }
 
             //########################## ACCIONES EN EL SUPER #######################
+            Console.WriteLine("################################################");
+            List<Receipt> boleta = new List<Receipt>();
 
-            List<string> compras = new List<string>();
 
-
-
+            Console.WriteLine("solo podra hacer compras de un elemento a la vez, tambien" +
+                "cuando ingrese un rut no valido, un  producto no valido o un producto sin stock regresara al menu" +
+                "para aclarar cajero = empleado ");
             for (int i = 1; i > 0; i++)
             {
-                Console.WriteLine("Escoja entre las siguientes ospciones" +
-                    "[comprar],[cambiar sueldo],[detener(en caso de que no quiera hacer nada más)]");
+                Console.WriteLine("Escoja entre las siguientes opciones" +
+                    "[comprar],[cambiar sueldo],[detener](en caso de que no quiera hacer nada más)");
                 string accion = Console.ReadLine();
 
                 if (accion == "detener")
                 {
+                    Console.WriteLine("################################################");
                     break;
                 }
-
                 if (accion == "comprar")
                 {
                     Console.WriteLine("Seleccione el rut del cliente que quiera que compre: ");
@@ -194,11 +205,20 @@ namespace laboratorio3
                                 {
                                     if (product_l[k].getPstock() > 0)
                                     {
-                                        compras.Add(comprador);
-                                        compras.Add(prod);
-                                        Product producto = new Product(product_l[k].getPname(), product_l[k].getPprice(), product_l[k].getPbrand(), product_l[k].getPstock()-1);
-                                        product_l.Add(producto);
-                                        product_l.Remove(product_l[k]);
+                                        Console.WriteLine("diga el rut del cajero que quiera: ");
+                                        string cajero = Console.ReadLine();
+                                        for (int t = 0; t < e1; t++)
+                                        {
+                                            if (employees_l[t].getRut() == cajero)
+                                            {
+                                                Receipt boletas = new Receipt("6 Abril 2020", "18:57", employees_l[t].getName(), client_l[j].getName(), prod);
+                                                boleta.Add(boletas);
+                                                Product producto = new Product(product_l[k].getPname(), product_l[k].getPprice(), product_l[k].getPbrand(), product_l[k].getPstock() - 1);
+                                                product_l.Add(producto);
+                                                product_l.Remove(product_l[k]);
+                                                Console.WriteLine("################################################");
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -208,37 +228,85 @@ namespace laboratorio3
                 }
                 if (accion == "cambiar sueldo")
                 {
-                    Console.WriteLine( "");
+                    Console.WriteLine("Escriba si quiere cambiar el sueldo a [cajero] o [auxiliar] :");
+                    string elegido = Console.ReadLine();
+                    if(elegido == "cajero")
+                    {
+                        Console.WriteLine("ingrese el rut del cajero que le quiere cambiar el sueldo: ");
+                        string rutaso = Console.ReadLine();
+                        for (int m = 0; m < e1; m++)
+                        {
+                            if (employees_l[m].getRut() == rutaso)
+                            {
+                                Console.WriteLine("diga cual va a ser el nuevo sueldo: ");
+                                string sueldo = Console.ReadLine();
+                                Employee empleado = new Employee(employees_l[m].getRut(),employees_l[m].getName(),
+                                    employees_l[m].getLast_name(), employees_l[m].getDate_of_birth(), employees_l[m].getNacionality(),sueldo);
+                                employees_l.Add(empleado);
+                                employees_l.Remove(employees_l[m]);
+                                Console.WriteLine("################################################");
+                            }
+                        }
+                    }
+                    if(elegido == "auxiliar")
+                    {
+                        Console.WriteLine("ingrese el rut del auxiliar que le quiere cambiar el sueldo: ");
+                        string rutaso1 = Console.ReadLine();
+                        for (int n = 0; n < a1; n++)
+                        {
+                            if (auxiliary_l[n].getRut() == rutaso1)
+                            {
+                                Console.WriteLine("diga cual va a ser el nuevo sueldo: ");
+                                string sueldo1 = Console.ReadLine();
+                                Auxiliary auxiliar = new Auxiliary(auxiliary_l[n].getRut(), auxiliary_l[n].getName(),
+                                    auxiliary_l[n].getLast_name(), auxiliary_l[n].getDate_of_birth(), auxiliary_l[n].getNacionality(), sueldo1);
+                                auxiliary_l.Add(auxiliar);
+                                auxiliary_l.Remove(auxiliary_l[n]);
+                                Console.WriteLine("################################################");
+                            }
+                        }
+
+                    }
                 }
                 
             }
 
-
+            Console.WriteLine("Las compras realizadas fueron");
+            System.Collections.IList list = boleta;
+            for (int i = 0; i < list.Count; i++)
+            {
+                Console.WriteLine(boleta[i].emitir());
+            }
+            Console.WriteLine("################################################");
             Console.WriteLine("La situacion final en el supermercado es: ");
             Console.WriteLine("Los empleados son : ");
             for (int i = 0; i < e1; i++)
             {
                 Console.WriteLine(employees_l[i].Informacion());
             }
+            Console.WriteLine("################################################");
 
             Console.WriteLine("Los auxiliares son : ");
             for (int i = 0; i < a1; i++)
             {
                 Console.WriteLine(auxiliary_l[i].Informacion());
             }
+            Console.WriteLine("################################################");
 
             Console.WriteLine("Los clientes son : ");
             for (int i = 0; i < c1; i++)
             {
                 Console.WriteLine(client_l[i].Informacion());
             }
+            Console.WriteLine("################################################");
 
             Console.WriteLine("Los productos son : ");
             for (int i = 0; i < p1; i++)
             {
                 Console.WriteLine(product_l[i].Informacion());
             }
-            
+            Console.WriteLine("################################################");
+
         }
     }
 }
