@@ -11,14 +11,16 @@ namespace laboratorio3
         private string cashier;
         private string buyer;
         private string produ;
+        private int money;
 
-        public Receipt(string date,string hour, string cashier,string buyer,string produ)
+        public Receipt(string date,string hour, string cashier,string buyer,string produ,int money)
         {
             this.date = date;
             this.hour = hour;
             this.cashier = cashier;
             this.buyer = buyer;
             this.produ = produ;
+            this.money = money;
         }
 
         public string getDate()
@@ -46,10 +48,15 @@ namespace laboratorio3
             return produ;
         }
 
+        public int getMoney()
+        {
+            return money;
+        }
+
         public string emitir()
         {
             return "fecha: " + date + " " + "hora: " + hour + " " + "cajero: "
-               + cashier + " " + "comprador: " + buyer;
+               + cashier + " " + "comprador: " + buyer+" "+ "producto comrado: "+produ+" "+ "por el monto de :"+ money ;
         }
     }   
 

@@ -181,7 +181,7 @@ namespace laboratorio3
             for (int i = 1; i > 0; i++)
             {
                 Console.WriteLine("Escoja entre las siguientes opciones" +
-                    "[comprar],[cambiar sueldo],[detener](en caso de que no quiera hacer nada más)");
+                    "[comprar],[cambiar sueldo],[cambiar precio producto],[detener](en caso de que no quiera hacer nada más)");
                 string accion = Console.ReadLine();
 
                 if (accion == "detener")
@@ -211,7 +211,7 @@ namespace laboratorio3
                                         {
                                             if (employees_l[t].getRut() == cajero)
                                             {
-                                                Receipt boletas = new Receipt("6 Abril 2020", "18:57", employees_l[t].getName(), client_l[j].getName(), prod);
+                                                Receipt boletas = new Receipt("6 Abril 2020", "18:57", employees_l[t].getName(), client_l[j].getName(), prod, product_l[k].getPprice());
                                                 boleta.Add(boletas);
                                                 Product producto = new Product(product_l[k].getPname(), product_l[k].getPprice(), product_l[k].getPbrand(), product_l[k].getPstock() - 1);
                                                 product_l.Add(producto);
@@ -266,9 +266,28 @@ namespace laboratorio3
                             }
                         }
 
+                    }            
+                }
+                if (accion == "cambiar precio producto")
+                {
+                    Console.WriteLine("ingrese el nombre del producto que le va a cambiar el precio: ");
+                    string producto1 = Console.ReadLine();
+                    for (int n = 0; n < p1; n++)
+                    {
+                        if (product_l[n].getPname() == producto1)
+                        {
+                            Console.WriteLine("diga cual va a ser el nuevo precio: ");
+                            string precio1 = Console.ReadLine();
+                            int prec = Int32.Parse(precio1);
+                            Product producto = new Product(product_l[n].getPname(), prec, product_l[n].getPbrand(), product_l[n].getPstock());
+                            product_l.Add(producto);
+                            product_l.Remove(product_l[n]);
+                            Console.WriteLine("################################################");
+
+                        }
                     }
                 }
-                
+
             }
 
             Console.WriteLine("Las compras realizadas fueron");
